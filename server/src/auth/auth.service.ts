@@ -28,11 +28,10 @@ export class AuthService {
       throw new HttpException('Does not exist', HttpStatus.BAD_REQUEST);
     }
     const hashPassword = await bcrypt.hash(userDto.password, 5);
-    const user = await this.userService.createUser({
+    return this.userService.createUser({
       ...userDto,
       password: hashPassword,
     });
-    return user;
   }
 
   private async generateToken(user: UserEntity) {
