@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { MovieEntity } from 'src/movies/movie.entity';
 
-@Entity()
+@Entity('user')
 export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;

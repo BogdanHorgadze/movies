@@ -20,7 +20,15 @@ export class MoviesController {
   @UseGuards(JwtAuthGuard)
   @Get()
   getMovies(@Req() req) {
-    return this.moviesService.get(req.user.id);
+    return this.moviesService.get(
+      {
+        limit: req.query.hasOwnProperty('limit') ? req.query.limit : 10,
+        page: req.query.hasOwnProperty('page') ? req.query.page : 0,
+        search: req.query.hasOwnProperty('search') ? req.query.search : '',
+        sort: req.query.hasOwnProperty('sort') ? req.query.sort : '',
+      },
+      req.user.id,
+    );
   }
 
   @UseGuards(JwtAuthGuard)

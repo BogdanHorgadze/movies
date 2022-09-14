@@ -3,6 +3,8 @@ import { CreateMovieDto } from './dto/create-movie.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MovieEntity } from './movie.entity';
 import { FilesService } from '../files/files.service';
+import { OptionsInterface } from '../options/options.interface';
+import { Like } from 'typeorm';
 
 @Injectable()
 export class MoviesService {
@@ -21,9 +23,20 @@ export class MoviesService {
     return this.movieRepository.save(movie);
   }
 
-  get(userId: number) {
-    return this.movieRepository.find({
-      where: { user: userId },
+  async get(options: OptionsInterface, userId: number) {
+    const [results, total] = await this.movieRepository.findAndCount({
+      where: {
+        user: { id: userId },
+        title: Like(`%${options.search}%`),
+      },
+      take: options.limit,
+      skip: options.page,
+      order: options.sort === 'latest' ? { year: 'DESC' } : { year: 'ASC' },
     });
+
+    return {
+      results,
+      total,
+    };
   }
 }

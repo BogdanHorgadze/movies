@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { UserEntity } from '../users/user.entity';
 
-@Entity()
+@Entity('movie')
 export class MovieEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -18,7 +18,10 @@ export class MovieEntity {
   @Column({ default: '' })
   image: string;
 
+  @Column({ default: '' })
+  year: string;
+
   @ManyToOne(() => UserEntity, (user) => user.movies)
-  @JoinColumn()
+  @JoinColumn({ name: 'userId' })
   user: UserEntity;
 }
