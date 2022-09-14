@@ -18,12 +18,11 @@ export class MoviesService {
       ...dto,
       image: fileName,
     });
-    const savedMovie = await this.movieRepository.save(movie);
-    return savedMovie;
+    return this.movieRepository.save(movie);
   }
 
-  async get(userId: number) {
-    return await this.movieRepository.find({
+  get(userId: number) {
+    return this.movieRepository.find({
       where: { user: userId },
     });
   }
