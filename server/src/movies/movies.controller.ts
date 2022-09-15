@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Query,
   Req,
   UploadedFile,
   UseGuards,
@@ -10,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { OptionsInterface } from 'src/options/options.interface';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { MoviesService } from './movies.service';
 
@@ -19,13 +21,13 @@ export class MoviesController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  getMovies(@Req() req) {
+  getMovies(@Query() query: OptionsInterface, @Req() req) {
     return this.moviesService.get(
       {
-        limit: req.query.hasOwnProperty('limit') ? req.query.limit : 10,
-        offset: req.query.hasOwnProperty('offset') ? req.query.offset : 0,
-        search: req.query.hasOwnProperty('search') ? req.query.search : '',
-        sort: req.query.hasOwnProperty('sort') ? req.query.sort : '',
+        limit: query.hasOwnProperty('limit') ? query.limit : 10,
+        offset: query.hasOwnProperty('offset') ? query.offset : 0,
+        search: query.hasOwnProperty('search') ? query.search : '',
+        sort: query.hasOwnProperty('sort') ? query.sort : '',
       },
       req.user.id,
     );
