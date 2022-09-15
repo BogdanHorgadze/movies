@@ -1,13 +1,10 @@
 FROM node:12.13-alpine
 
-WORKDIR /app
+RUN  mkdir -m 755 /home/node/application
+COPY . /home/node/application
 
-COPY package*.json ./
-
+WORKDIR /home/node/application
+RUN rm -rf node_modules
 RUN npm install
 
-COPY . .
-
-COPY ./dist ./dist
-
-CMD ["npm", "run", "start:dev"]
+ENTRYPOINT npm run start:dev

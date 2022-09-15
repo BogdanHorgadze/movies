@@ -24,7 +24,6 @@ export class MoviesService {
   }
 
   async get(options: OptionsInterface, userId: number) {
-    console.log(options);
     const [results, total] = await this.movieRepository.findAndCount({
       where: {
         user: { id: userId },
