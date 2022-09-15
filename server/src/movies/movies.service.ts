@@ -31,7 +31,7 @@ export class MoviesService {
       },
       take: options.limit,
       skip: options.page,
-      order: options.sort === 'latest' ? { year: 'DESC' } : { year: 'ASC' },
+      order: options.sort === 'new' ? { year: 'DESC' } : { year: 'ASC' },
     });
 
     return {
