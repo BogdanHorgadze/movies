@@ -1,0 +1,10 @@
+.MovieItem {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  .desc {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+}
