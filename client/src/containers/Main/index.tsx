@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 
+import Auth from '../../helpers/auth'
 import MovieItem from '../../components/MovieItem';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import movieAsyncAction from '../../store/asyncActions/movieAsyncActions';
 import styles from './styles.module.scss';
+import { clearMovie } from '../../store/movieSlice';
 
 function Main() {
   const dispatch = useAppDispatch();
@@ -15,11 +17,12 @@ function Main() {
   const movies = useAppSelector((state) => state.movie.moviesData);
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('');
-  const [limit, setLimit] = useState(5);
+  const [limit] = useState(5);
   const [page, setPage] = useState(0);
 
   const onExit = () => {
-    localStorage.removeItem('token');
+    Auth.clearToken()
+    dispatch(clearMovie());
     navigate('/login');
   };
 
@@ -71,15 +74,17 @@ function Main() {
         </div>
         <div className={styles.list}>{renderMovies()}</div>
         <div className={styles.pagination_container}>
-          <ReactPaginate
-            nextLabel=">"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={limit}
-            containerClassName={styles.pagination}
-            activeClassName={styles.active}
-            pageCount={Math.ceil(movies.total / limit)}
-            previousLabel="<"
-          />
+          {movies.total > 5 ? (
+            <ReactPaginate
+              nextLabel=">"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={limit}
+              containerClassName={styles.pagination}
+              activeClassName={styles.active}
+              pageCount={Math.ceil(movies.total / limit)}
+              previousLabel="<"
+            />
+          ) : null}
         </div>
       </div>
     </div>

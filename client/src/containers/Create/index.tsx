@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../hook';
+import { useAppDispatch } from '../../hook';
 import movieAsyncAction from '../../store/asyncActions/movieAsyncActions';
 import styles from './styles.module.scss';
 
@@ -15,8 +15,11 @@ function Create() {
     formData.append('title', e.target.elements[0].value);
     formData.append('year', e.target.elements[1].value);
     formData.append('image', e.target.elements[2].files[0]);
-    dispatch(movieAsyncAction.createMovies(formData));
-    navigate('/main');
+    dispatch(movieAsyncAction.createMovies(formData))
+      .unwrap()
+      .then(() => {
+        navigate('/main');
+      });
   };
 
   return (

@@ -23,7 +23,11 @@ const initialState: MovieState = {
 const MovieSlice = createSlice({
   name: 'movie',
   initialState,
-  reducers: {},
+  reducers: {
+    clearMovie(state) {
+      state.moviesData = {} as MoviesData;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       authAsyncActions.getMovies.fulfilled,
@@ -33,5 +37,7 @@ const MovieSlice = createSlice({
     );
   },
 });
+
+export const { clearMovie } = MovieSlice.actions;
 
 export default MovieSlice.reducer;

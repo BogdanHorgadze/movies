@@ -30,41 +30,35 @@ function Form(props: FormProps) {
   return (
     <div className={styles.form_modal}>
       <form className={styles.register_modal} onSubmit={handleSubmit}>
-        {!valid && (
-          <input
-            className={styles.form_field}
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={values.email}
-            onChange={handleInputChange}
-          />
-        )}
+        <input
+          className={styles.form_field}
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={values.email}
+          onChange={handleInputChange}
+        />
 
         {submitted && !values.email && (
           <span id="email-error">Please enter an email address</span>
         )}
 
-        {!valid && (
-          <input
-            className={styles.form_field}
-            type="password"
-            placeholder="password"
-            name="password"
-            value={values.password}
-            onChange={handleInputChange}
-          />
-        )}
+        <input
+          className={styles.form_field}
+          type="password"
+          placeholder="password"
+          name="password"
+          value={values.password}
+          onChange={handleInputChange}
+        />
 
         {submitted && !values.password && (
           <span id="first-password-error">Please enter a password</span>
         )}
 
-        {!valid && (
-          <button className={styles.form_field} type="submit">
-            {buttonText}
-          </button>
-        )}
+        <button className={styles.form_field} type="submit">
+          {buttonText}
+        </button>
       </form>
       <div className={styles.link}>
         <p onClick={redirectHandler}>{redirectText}</p>
