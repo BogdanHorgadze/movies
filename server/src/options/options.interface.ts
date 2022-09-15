@@ -1,6 +1,6 @@
 export interface OptionsInterface {
   limit: number;
-  page: number;
+  offset: number;
   search: string;
   sort: string;
 }

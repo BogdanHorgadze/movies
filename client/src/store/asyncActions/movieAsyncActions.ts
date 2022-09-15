@@ -20,7 +20,7 @@ const createMovies = createAsyncThunk(
   'movies/createMovies',
   async (body: any, { rejectWithValue }) => {
     try {
-      return await ApiInstance.post('movies/upload', body, {
+      return await ApiInstance.post('movies/create', body, {
         headers: {
           accept: 'application/json',
           'Accept-Language': 'en-US,en;q=0.8',

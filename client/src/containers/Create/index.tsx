@@ -43,8 +43,13 @@ function Create() {
             placeholder="2022"
             name="year"
           />
-
-          <input className={styles.form_field} type="file" name="image" />
+          <label htmlFor="file">Image</label>
+          <input
+            className={styles.form_field}
+            type="file"
+            name="image"
+            id="file"
+          />
 
           <button className={styles.form_field} type="submit">
             Create

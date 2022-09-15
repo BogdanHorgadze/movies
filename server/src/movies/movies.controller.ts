@@ -23,7 +23,7 @@ export class MoviesController {
     return this.moviesService.get(
       {
         limit: req.query.hasOwnProperty('limit') ? req.query.limit : 10,
-        page: req.query.hasOwnProperty('page') ? req.query.page : 0,
+        offset: req.query.hasOwnProperty('offset') ? req.query.offset : 0,
         search: req.query.hasOwnProperty('search') ? req.query.search : '',
         sort: req.query.hasOwnProperty('sort') ? req.query.sort : '',
       },
@@ -33,7 +33,7 @@ export class MoviesController {
 
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('image'))
-  @Post('/upload')
+  @Post('/create')
   createMovie(@Body() dto: CreateMovieDto, @UploadedFile() image, @Req() req) {
     return this.moviesService.create({ ...dto, user: req.user.id }, image);
   }

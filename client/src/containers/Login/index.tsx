@@ -26,7 +26,7 @@ function Login() {
         [name]: value,
       }));
     },
-    []
+    [],
   );
 
   const handleSubmit = useCallback(
@@ -49,7 +49,7 @@ function Login() {
       }
       setSubmitted(true);
     },
-    [dispatch, navigate, values]
+    [dispatch, navigate, values],
   );
 
   const redirectHandler = useCallback(() => {

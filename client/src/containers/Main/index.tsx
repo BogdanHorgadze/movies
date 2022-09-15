@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 
-import Auth from '../../helpers/auth'
 import MovieItem from '../../components/MovieItem';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
@@ -18,10 +17,10 @@ function Main() {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('');
   const [limit] = useState(5);
-  const [page, setPage] = useState(0);
+  const [offset, setOffset] = useState(0);
 
   const onExit = () => {
-    Auth.clearToken()
+    localStorage.removeItem('token');
     dispatch(clearMovie());
     navigate('/login');
   };
@@ -46,7 +45,7 @@ function Main() {
   };
 
   const handlePageClick = (e: { selected: number }) => {
-    setPage(e.selected);
+    setOffset(e.selected * 5);
   };
 
   useEffect(() => {
@@ -54,10 +53,10 @@ function Main() {
       search,
       sort,
       limit,
-      page,
+      offset,
     };
     dispatch(movieAsyncAction.getMovies(params));
-  }, [dispatch, limit, page, search, sort]);
+  }, [dispatch, limit, offset, search, sort]);
 
   return (
     <div className={styles.Main}>
