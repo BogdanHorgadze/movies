@@ -34,6 +34,7 @@ function Main() {
   };
 
   const renderMovies = () => {
+    if (!movies.results?.length) return <div className={styles.message}>Create your first movie</div>;
     return movies.results?.map((movie, i) => (
       <MovieItem
         key={i}
