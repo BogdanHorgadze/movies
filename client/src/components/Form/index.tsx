@@ -8,7 +8,6 @@ type Values = {
 interface FormProps {
   buttonText: string;
   submitted: boolean;
-  valid: boolean;
   values: Values;
   redirectText: string;
   redirectHandler: () => void;
@@ -20,7 +19,6 @@ function Form(props: FormProps) {
   const {
     buttonText,
     submitted,
-    valid,
     values,
     redirectText,
     redirectHandler,

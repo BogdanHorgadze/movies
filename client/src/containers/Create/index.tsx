@@ -9,12 +9,13 @@ function Create() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const elements = (e.target as any).elements;
     const formData = new FormData();
-    formData.append('title', e.target.elements[0].value);
-    formData.append('year', e.target.elements[1].value);
-    formData.append('image', e.target.elements[2].files[0]);
+    formData.append('title', elements[0].value);
+    formData.append('year', elements[1].value);
+    formData.append('image', elements[2].files[0]);
     dispatch(movieAsyncAction.createMovies(formData))
       .unwrap()
       .then(() => {

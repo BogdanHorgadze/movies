@@ -1,19 +1,21 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ApiInstance } from '../../api/instance';
+import { MoviesData } from '../movieSlice';
 
 type Params = {
   search: string;
 };
 
-const getMovies = createAsyncThunk(
+const getMovies = createAsyncThunk<MoviesData, Params>(
   'movies/getMovies',
   async (params: Params, { rejectWithValue }) => {
     try {
-      return await ApiInstance.get('movies', { params });
+      const { data } = await ApiInstance.get('movies', { params });
+      return data;
     } catch (err) {
       return rejectWithValue(err);
     }
-  }
+  },
 );
 
 const createMovies = createAsyncThunk(
@@ -30,7 +32,7 @@ const createMovies = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err);
     }
-  }
+  },
 );
 
 const authAsyncActions = {

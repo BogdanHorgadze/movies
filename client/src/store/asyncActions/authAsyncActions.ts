@@ -14,7 +14,7 @@ const registerationUser = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err);
     }
-  }
+  },
 );
 
 const loginUser = createAsyncThunk(
@@ -27,7 +27,7 @@ const loginUser = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err);
     }
-  }
+  },
 );
 
 const authAsyncActions = {

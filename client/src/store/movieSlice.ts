@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import authAsyncActions from './asyncActions/movieAsyncActions';
 
-type MovieItem = {
+export type MovieItem = {
   image: string;
   year: string;
   title: string;
 };
 
-type MoviesData = {
+export type MoviesData = {
   results: Array<MovieItem>;
   total: number;
 };
@@ -31,9 +31,9 @@ const MovieSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       authAsyncActions.getMovies.fulfilled,
-      (state, { payload }: any) => {
-        state.moviesData = payload.data;
-      }
+      (state, { payload }) => {
+        state.moviesData = payload;
+      },
     );
   },
 });

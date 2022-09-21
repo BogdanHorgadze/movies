@@ -15,7 +15,6 @@ function Login() {
   });
 
   const [submitted, setSubmitted] = useState(false);
-  const [valid, setValid] = useState(false);
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +32,6 @@ function Login() {
     (e: React.SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (values.password && values.email) {
-        setValid(true);
         dispatch(authAsyncActions.loginUser(values))
           .unwrap()
           .then(() => {
@@ -66,7 +64,6 @@ function Login() {
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         values={values}
-        valid={valid}
       />
     </div>
   );
